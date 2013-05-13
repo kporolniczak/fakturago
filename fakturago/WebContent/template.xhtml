@@ -1,21 +1,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml"  
     xmlns:h="http://java.sun.com/jsf/html"  
     xmlns:f="http://java.sun.com/jsf/core"  
-    xmlns:p="http://primefaces.org/ui">  
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">  
   
-    <h:head>  
-  
-    </h:head>  
+  <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <title>FakturaGO</title>
+    </h:head> 
       
     <h:body>  
       
       <p:tabMenu activeIndex="0">  
-    <p:menuitem value="Overview" url="/ui/tabMenu.jsf" icon="ui-icon-star"/>  
-    <p:menuitem value="Demos" url="/ui/tabMenuDemos.jsf" icon="ui-icon-search" />  
-    <p:menuitem value="Documentation" url="/ui/tabMenuDocumentation.jsf" icon="ui-icon-document"/>  
-    <p:menuitem value="Support" url="/ui/tabMenuSupport.jsf" icon="ui-icon-wrench"/>  
-    <p:menuitem value="Social" url="/ui/tabMenuSocial.jsf" icon="ui-icon-person" />  
-</p:tabMenu>  
-          
+    <p:menuitem value="#{msg.home}" url="index.xhtml" icon="ui-icon-star"/>  
+    <p:menuitem value="#{msg.addBuyer}" url="addBuyer.xhtml" icon="ui-icon-person" />  
+    <p:menuitem value="#{msg.invoice}" url="invoice.xhtml" icon="ui-icon-document"/>  
+    <p:menuitem value="#{msg.profile}" url="profile.xhtml" icon="ui-icon-wrench"/>  
+    <p:menuitem value="#{msg.reports}" url="reports.xhtml" icon="ui-icon-note" />  
+</p:tabMenu>   
+        <ui:insert name="content"></ui:insert>   
     </h:body>  
 </html>  
