@@ -4,13 +4,11 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
-/**
- * The persistent class for the buyer database table.
- * 
- */
 @Entity
 @Table(name="buyer")
+@NamedQueries({
+	@NamedQuery(name = "Buyer.findAll", query = "SELECT p FROM Buyer p")
+	})
 public class Buyer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -48,7 +46,7 @@ public class Buyer implements Serializable {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

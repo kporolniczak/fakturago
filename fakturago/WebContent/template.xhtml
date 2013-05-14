@@ -12,14 +12,16 @@
     </h:head> 
       
     <h:body>  
-      
-      <p:tabMenu activeIndex="0">  
-    <p:menuitem value="#{msg.home}" url="index.xhtml" icon="ui-icon-star"/>  
-    <p:menuitem value="#{msg.addBuyer}" url="addBuyer.xhtml" icon="ui-icon-person" />  
+      <h:form>
+      <p:tabMenu activeIndex="#{myBean.myActiveIndex}">  
+    <p:menuitem value="#{msg.home}" url="index.xhtml" action="#{myBean.setActiveIndex(0)}" icon="ui-icon-star"/>
+    <p:menuitem value="#{msg.buyersList}" url="buyersList.xhtml" action="#{myBean.setActiveIndex(0)}" icon="ui-icon-star"/>    
+    <p:menuitem value="#{msg.addBuyer}" url="addBuyer.xhtml" action="#{myBean.setActiveIndex(1)}" icon="ui-icon-person" />  
     <p:menuitem value="#{msg.invoice}" url="invoice.xhtml" icon="ui-icon-document"/>  
     <p:menuitem value="#{msg.profile}" url="profile.xhtml" icon="ui-icon-wrench"/>  
     <p:menuitem value="#{msg.reports}" url="reports.xhtml" icon="ui-icon-note" />  
 </p:tabMenu>   
+	</h:form>
         <ui:insert name="content"></ui:insert>   
     </h:body>  
 </html>  

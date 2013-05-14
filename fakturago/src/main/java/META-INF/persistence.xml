@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-	<persistence-unit name="fakturago">
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="FGPU" transaction-type="RESOURCE_LOCAL">
 		<class>pl.com.fakturago.entity.Buyer</class>
 		<class>pl.com.fakturago.entity.Invoice</class>
 		<class>pl.com.fakturago.entity.Province</class>
@@ -8,10 +11,12 @@
 		<class>pl.com.fakturago.entity.Service</class>
 		<class>pl.com.fakturago.entity.Vat</class>
 		<properties>
-			<property name="hibernate.connection.username" value="root"/>
-			<property name="hibernate.connection.password" value="pass"/>
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/fakturago"/>
-			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-		</properties>
+		<property name="hibernate.ejb.cfgfile" value="./hibernate.cfg.xml"/>
+		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+		<property name="hibernate.connection.username" value="root"/>
+		<property name="hibernate.connection.password" value="pass"/>
+		<property name="hibernate.default_schema" value="fakturago"/>	
+	</properties>
 	</persistence-unit>
+
 </persistence>
