@@ -10,15 +10,16 @@
 <ui:define name="content">
  <p:panel header="List of Buyers">
 <p:dataTable var="buyer" value="#{buyerBean.buyersList}">  
-        <p:column headerText=#{msg.name}>  
+        <p:column headerText="#{msg.name}">  
             <h:outputText value="#{buyer.name}" />  
         </p:column>
-        <p:column headerText=#{msg.city}>  
+        <p:column headerText="#{msg.city}">  
             <h:outputText value="#{buyer.city}" />  
         </p:column>
-        <p:column headerText=#{msg.address}>  
+        <p:column headerText="#{msg.address}">  
             <h:outputText value="#{buyer.address}" />  
-        </p:column>      
+        </p:column>  
+</p:dataTable>    
  </p:panel>
  </ui:define>
 </ui:composition>  

@@ -6,17 +6,23 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-
 import pl.com.fakturago.config.DBManager;
 import pl.com.fakturago.entity.Buyer;
+import pl.com.fakturago.entity.Province;
+
+import java.io.Serializable;
 
 @SessionScoped
 @Named("buyerBean")
-public class BuyerFormBean {
+public class BuyerFormBean implements Serializable {
 
-	private Buyer buyer = new Buyer();
+
+	private static final long serialVersionUID = 1L;
+	@Inject
+	private Buyer buyer;
 	private String title;
 	private String text;  
         
@@ -34,7 +40,7 @@ public class BuyerFormBean {
 		this.buyer = buyer;
 	}
 	
-	public List<Buyer> getBuyerList(){
+	public List<Buyer> getBuyersList(){
 		EntityManager em = DBManager.getManager().createEntityManager();
 		List list = em.createNamedQuery("Buyer.findAll").getResultList();
 		return list;
@@ -42,13 +48,15 @@ public class BuyerFormBean {
 	
 	public String saveBuyer(){
 		EntityManager em = DBManager.getManager().createEntityManager();
+		FacesContext context = FacesContext.getCurrentInstance();
 		em.getTransaction().begin();
 		buyer.setId(null);
-		em.persist(buyer);
+		em.merge(buyer);
 		em.getTransaction().commit();
 		em.close();
+		context.addMessage(null, new FacesMessage("Saved","You sucessfully added buyer to the database"));
 		this.buyer = new Buyer();
-		return null;
+		return "index.xhtml";
 	}
 	
 	public void buyerListener(ActionEvent ae){
@@ -59,15 +67,13 @@ public class BuyerFormBean {
 	}
 	
 	public String deleteBuyer(){
-		EntityManager em = DBManager.getManager().createEntityManager();
-		FacesContext context = FacesContext.getCurrentInstance(); 
+		EntityManager em = DBManager.getManager().createEntityManager(); 
 		em.getTransaction().begin();
 		this.buyer = em.find(Buyer.class, buyer.getId());
 		em.remove(this.buyer);
 		this.buyer = new Buyer();
 		em.getTransaction().commit();
 		em.close();
-		context.addMessage(null, new FacesMessage("Saved","You sucessfully added buyer to the database"));
 		return null;
 	}
 

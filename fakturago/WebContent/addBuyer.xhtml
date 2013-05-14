@@ -24,7 +24,8 @@
 <h:inputText value="#{buyerBean.buyer.pesel}" />
 <h:outputText value="#{msg.mail}" />
 <h:inputText value="#{buyerBean.buyer.mail}" />
-<p:commandButton value="#{msg.addBuyer}" actionListener="#{buyerBean.saveBuyer}" icon="ui-icon-disk" />  
+<h:selectOneMenu id="buyer" value="#{buyerBean.buyer.province}" required="true"/>
+<p:commandButton value="#{msg.addBuyer}" action="#{buyerBean.saveBuyer}" icon="ui-icon-disk" />  
 </h:panelGrid>
  </p:panel>
  </ui:define>
