@@ -8,9 +8,12 @@
  </ui:define>
 
 <ui:define name="content">
+<h:form>
+
+<p:growl id="growl" showDetail="true" sticky="true" />
 <p:panel header="Add  new buyer">
 <h:panelGrid columns="2" cellpadding="5">
-<h:outputText value="#{msg.name}" />
+<h:outputText value="#{msg.name} *" />
 <h:inputText value="#{buyerBean.buyer.name}" />
 <h:outputText value="#{msg.address}" />
 <h:inputText value="#{buyerBean.buyer.address}" />
@@ -20,13 +23,19 @@
 <h:inputText value="#{buyerBean.buyer.zip}" />
 <h:outputText value="#{msg.nip}" />
 <h:inputText value="#{buyerBean.buyer.nip}" />
+<h:outputText value="#{msg.province}" />
+<p:selectOneMenu id="province" value="#{buyerBean.buyer.province}">
+			<f:converter converterId="provinceConverter"/>  
+            <f:selectItems value="#{provinceBean.provinceList}" 
+            var="province" itemValue="#{province}" itemLabel="#{province.name}"/>   
+        </p:selectOneMenu> 
 <h:outputText value="#{msg.pesel}" />
 <h:inputText value="#{buyerBean.buyer.pesel}" />
 <h:outputText value="#{msg.mail}" />
 <h:inputText value="#{buyerBean.buyer.mail}" />
-<h:selectOneMenu id="buyer" value="#{buyerBean.buyer.province}" required="true"/>
-<p:commandButton value="#{msg.addBuyer}" action="#{buyerBean.saveBuyer}" icon="ui-icon-disk" />  
+<p:commandButton value="#{msg.addBuyer}" actionListener="#{buyerBean.saveBuyer}" icon="ui-icon-disk" update="growl"/>  
 </h:panelGrid>
  </p:panel>
+ </h:form>
  </ui:define>
 </ui:composition>  

@@ -2,7 +2,7 @@ package pl.com.fakturago.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -19,7 +19,7 @@ public class Buyer implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	private String address;
 
@@ -36,13 +36,13 @@ public class Buyer implements Serializable {
 	private String zip;
 
 	//bi-directional many-to-one association to Province
-	@ManyToOne
-	@JoinColumn(name="fk_province")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="province",referencedColumnName="id")
 	private Province province;
 
 	//bi-directional many-to-one association to Invoice
 	@OneToMany(mappedBy="buyer")
-	private List<Invoice> invoices;
+	private Set<Invoice> invoices;
 
 	public Buyer() {
 	}
@@ -119,11 +119,11 @@ public class Buyer implements Serializable {
 		this.province = province;
 	}
 
-	public List<Invoice> getInvoices() {
+	public Set<Invoice> getInvoices() {
 		return this.invoices;
 	}
 
-	public void setInvoices(List<Invoice> invoices) {
+	public void setInvoices(Set<Invoice> invoices) {
 		this.invoices = invoices;
 	}
 
@@ -141,4 +141,17 @@ public class Buyer implements Serializable {
 		return invoice;
 	}
 
+	@Override
+	public boolean equals(Object object){
+		if(!(object instanceof Buyer)){
+			return false;
+		}
+		Buyer other = (Buyer) object;
+		if((this.id == null && other.id != null 
+				|| this.id != null && !this.id.equals(other.id))){
+		return false;
+		}
+		return true;
+		}
+	
 }

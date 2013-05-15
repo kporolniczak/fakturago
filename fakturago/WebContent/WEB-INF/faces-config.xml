@@ -2,6 +2,20 @@
 <faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
  xmlns:xi="http://www.w3.org/2001/XInclude"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+ <converter>
+  <converter-id>provinceConverter</converter-id>
+  <converter-class>pl.com.fakturago.config.ProvinceConverter</converter-class>
+ </converter>
+ <managed-bean>
+  <managed-bean-name>buyerBean</managed-bean-name>
+  <managed-bean-class>pl.com.fakturago.controllers.BuyerFormBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>
+  <managed-bean>
+  <managed-bean-name>provinceBean</managed-bean-name>
+  <managed-bean-class>pl.com.fakturago.controllers.ProvinceBean</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>
  <application>
   <resource-bundle>
    <base-name>pl.com.fakturago.messages_en</base-name>

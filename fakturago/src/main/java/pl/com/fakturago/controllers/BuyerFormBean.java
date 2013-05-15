@@ -21,8 +21,7 @@ public class BuyerFormBean implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;
-	@Inject
-	private Buyer buyer;
+	private Buyer buyer	 = new Buyer();
 	private String title;
 	private String text;  
         
@@ -46,7 +45,7 @@ public class BuyerFormBean implements Serializable {
 		return list;
 	}
 	
-	public String saveBuyer(){
+	public String saveBuyer(ActionEvent actionEvent){
 		EntityManager em = DBManager.getManager().createEntityManager();
 		FacesContext context = FacesContext.getCurrentInstance();
 		em.getTransaction().begin();
@@ -54,16 +53,9 @@ public class BuyerFormBean implements Serializable {
 		em.merge(buyer);
 		em.getTransaction().commit();
 		em.close();
-		context.addMessage(null, new FacesMessage("Saved","You sucessfully added buyer to the database"));
 		this.buyer = new Buyer();
-		return "index.xhtml";
-	}
-	
-	public void buyerListener(ActionEvent ae){
-	String ids = FacesContext.getCurrentInstance().
-		getExternalContext().getRequestParameterMap().get("buyerID").toString();
-	int id = Integer.parseInt(ids);
-	this.buyer.setId(id);
+		context.addMessage(null, new FacesMessage("Buyer addes", "You successfully added new buyer")); 
+		return null;
 	}
 	
 	public String deleteBuyer(){
@@ -73,7 +65,7 @@ public class BuyerFormBean implements Serializable {
 		em.remove(this.buyer);
 		this.buyer = new Buyer();
 		em.getTransaction().commit();
-		em.close();
+		em.close();	
 		return null;
 	}
 
