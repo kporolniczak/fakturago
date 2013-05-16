@@ -14,7 +14,7 @@ public class BuyerContextListener implements ServletContextListener {
 	}
 
 	@Override
-	public void contextDestroyed(ServletContextEvent arg0) {
+	public void contextDestroyed(ServletContextEvent sce) {
 		DBManager.getManager().closeEntityManagerFactory();
 
 	}

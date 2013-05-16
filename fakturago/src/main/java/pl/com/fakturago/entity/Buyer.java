@@ -26,7 +26,8 @@ public class Buyer implements Serializable {
 	private String city;
 
 	private String mail;
-
+	
+	
 	private String name;
 
 	private String nip;
@@ -45,6 +46,10 @@ public class Buyer implements Serializable {
 	private Set<Invoice> invoices;
 
 	public Buyer() {
+	}
+	
+	public Buyer(Integer id) {
+		this.id = id;
 	}
 
 	public int getId() {
@@ -78,7 +83,7 @@ public class Buyer implements Serializable {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-
+	
 	public String getName() {
 		return this.name;
 	}
@@ -154,4 +159,10 @@ public class Buyer implements Serializable {
 		return true;
 		}
 	
+	@Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
 }

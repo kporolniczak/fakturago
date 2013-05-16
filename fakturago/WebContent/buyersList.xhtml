@@ -8,8 +8,14 @@
  </ui:define>
 
 <ui:define name="content">
+<h:form id="list"> 
+<p:growl id="growl" showDetail="true"/> 
  <p:panel header="List of Buyers">
-<p:dataTable var="buyer" value="#{buyerBean.buyersList}">  
+<p:dataTable var="buyer" value="#{buyerBean.buyersList}" paginator="true" rows="15" 
+ rowKey="#{buyer.name}" selection="#{buyerBean.buyer}" selectionMode="single"> 
+ 		<p:ajax event="rowSelect" listener="#{buyerBean.onRowSelect}"   
+                    update=":list:display :list:growl" oncomplete="buyerDialog.show()" />  
+        <p:ajax event="rowUnselect" listener="#{buyerBean.onRowUnselect}" update=":list:growl"/> 
         <p:column headerText="#{msg.name}">  
             <h:outputText value="#{buyer.name}" />  
         </p:column>
@@ -18,8 +24,45 @@
         </p:column>
         <p:column headerText="#{msg.address}">  
             <h:outputText value="#{buyer.address}" />  
-        </p:column>  
-</p:dataTable>    
+        </p:column> 
+        <p:column headerText="Actions">  
+            <f:facet name="header">Actions</f:facet>
+			<h:commandLink value="Usuń" action="#{buyerBean.deleteBuyer}" 
+			actionListener="#{buyerBean.buyerListener}">
+			<f:param name="Id" value="#{buyer.id}" />
+			</h:commandLink> 
+			<p:spacer width="20" />
+			<h:commandLink value="Edytuj" action="#{buyerBean.loadToEdit}" 
+			actionListener="#{buyerBean.buyerListener}">
+			<f:param name="Id" value="#{buyer.id}" />
+			</h:commandLink> 
+        </p:column> 
+
+</p:dataTable> 
+<p:dialog id="dialog" header="Buyer Detail" widgetVar="buyerDialog" resizable="false"  
+              width="400" showEffect="clip" hideEffect="fold">  
+  
+        <h:panelGrid id="display" columns="2" cellpadding="4">  
+  
+            <h:outputText value="#{msg.name}" />  
+            <h:outputText value="#{buyerBean.buyer.name}" />   
+    		<h:outputText value="#{msg.address}" />  
+            <h:outputText value="#{buyerBean.buyer.address}" /> 
+            <h:outputText value="#{msg.city}" />  
+            <h:outputText value="#{buyerBean.buyer.city}" />
+            <h:outputText value="#{msg.zip}" />  
+            <h:outputText value="#{buyerBean.buyer.zip}" />
+            <h:outputText value="#{msg.nip}" />  
+            <h:outputText value="#{buyerBean.buyer.nip}" />
+            <h:outputText value="#{msg.province}" />  
+            <h:outputText value="#{buyerBean.buyer.province.name}" />
+            <h:outputText value="#{msg.pesel}" />  
+            <h:outputText value="#{buyerBean.buyer.pesel}" />
+            <h:outputText value="#{msg.mail}" />  
+            <h:outputText value="#{buyerBean.buyer.mail}" />
+        </h:panelGrid>  
+    </p:dialog>   
  </p:panel>
+ </h:form>
  </ui:define>
 </ui:composition>  

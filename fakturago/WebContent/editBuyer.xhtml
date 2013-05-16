@@ -33,7 +33,7 @@
 <p:inputText value="#{buyerBean.buyer.pesel}" />
 <h:outputText value="#{msg.mail}" />
 <p:inputText value="#{buyerBean.buyer.mail}" />
-<p:commandButton value="#{msg.addBuyer}" actionListener="#{buyerBean.saveBuyer}" icon="ui-icon-disk" update="growl"/>  
+<p:commandButton value="Zapisz" action="#{buyerBean.edit}" icon="ui-icon-disk" update="growl"/>  
 </h:panelGrid>
  </p:panel>
  </h:form>

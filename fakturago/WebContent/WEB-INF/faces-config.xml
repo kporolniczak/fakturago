@@ -9,21 +9,21 @@
  <managed-bean>
   <managed-bean-name>buyerBean</managed-bean-name>
   <managed-bean-class>pl.com.fakturago.controllers.BuyerFormBean</managed-bean-class>
-  <managed-bean-scope>request</managed-bean-scope>
+  <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
   <managed-bean>
   <managed-bean-name>provinceBean</managed-bean-name>
   <managed-bean-class>pl.com.fakturago.controllers.ProvinceBean</managed-bean-class>
-  <managed-bean-scope>request</managed-bean-scope>
+  <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
  <application>
   <resource-bundle>
-   <base-name>pl.com.fakturago.messages_en</base-name>
+   <base-name>pl.com.fakturago.messages</base-name>
    <var>msg</var>
   </resource-bundle>
   <message-bundle>pl.com.fakturago.errormessages</message-bundle>
   <locale-config>
-   <default-locale>en</default-locale>
+   <default-locale>pl</default-locale>
    <supported-locale>pl</supported-locale>
    <supported-locale>en</supported-locale>
   </locale-config>
