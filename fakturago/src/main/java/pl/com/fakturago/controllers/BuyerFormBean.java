@@ -112,5 +112,6 @@ public class BuyerFormBean implements Serializable {
   
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }  
+ 
 }
 

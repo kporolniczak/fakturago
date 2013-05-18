@@ -6,8 +6,7 @@
   
   <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
-        <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
         <title>FakturaGO</title>
     </h:head> 
       
@@ -17,8 +16,8 @@
     <p:menuitem value="#{msg.home}" url="index.xhtml" action="#{myBean.setActiveIndex(0)}" icon="ui-icon-star"/>
     <p:menuitem value="#{msg.buyersList}" url="buyersList.xhtml" action="#{myBean.setActiveIndex(1)}" icon="ui-icon-star"/>    
     <p:menuitem value="#{msg.addBuyer}" url="addBuyer.xhtml" action="#{myBean.setActiveIndex(2)}" icon="ui-icon-person" />  
-    <p:menuitem value="#{msg.invoice}" url="invoice.xhtml" icon="ui-icon-document"/>  
-    <p:menuitem value="#{msg.profile}" url="profile.xhtml" icon="ui-icon-wrench"/>  
+    <p:menuitem value="#{msg.invoice}" action="#{invoiceBean.loadToEdit}" icon="ui-icon-document"/>  
+    <p:menuitem value="#{msg.profile}" action="#{sellerBean.loadToEdit}" icon="ui-icon-wrench"/>  
     <p:menuitem value="#{msg.reports}" url="reports.xhtml" icon="ui-icon-note" />  
 </p:tabMenu>   
 	</h:form>

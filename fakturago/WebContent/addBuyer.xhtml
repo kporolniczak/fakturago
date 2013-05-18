@@ -15,24 +15,26 @@
 <h:panelGrid columns="2" cellpadding="5">
 <h:outputText value="#{msg.name} *" />
 <p:inputText value="#{buyerBean.buyer.name}" required="true"/>
-<h:outputText value="#{msg.address}" />
+<h:outputText value="#{msg.address} *" />
 <p:inputText value="#{buyerBean.buyer.address}" required="true"/>
-<h:outputText value="#{msg.city}" />
+<h:outputText value="#{msg.city} *" />
 <p:inputText value="#{buyerBean.buyer.city}" required="true"/>
-<h:outputText value="#{msg.zip}" />
-<p:inputText value="#{buyerBean.buyer.zip}" required="true"/>
-<h:outputText value="#{msg.nip}" />
-<p:inputText value="#{buyerBean.buyer.nip}" required="true"/>
-<h:outputText value="#{msg.province}" />
+<h:outputText value="#{msg.zip} *" />
+<p:inputMask value="#{buyerBean.buyer.zip}" required="true" mask="99-999"/>
+<h:outputText value="#{msg.nip} *" />
+<p:inputMask value="#{buyerBean.buyer.nip}" required="true" mask="999-999-99-99"/>
+<h:outputText value="#{msg.province} *" />
 <p:selectOneMenu id="province" value="#{buyerBean.buyer.province}">
 			<f:converter converterId="provinceConverter"/>  
             <f:selectItems value="#{provinceBean.provinceList}" 
             var="province" itemValue="#{province}" itemLabel="#{province.name}"/>   
         </p:selectOneMenu> 
 <h:outputText value="#{msg.pesel}" />
-<p:inputText value="#{buyerBean.buyer.pesel}" />
+<p:inputMask value="#{buyerBean.buyer.pesel}" mask="99999999999"/>
 <h:outputText value="#{msg.mail}" />
-<p:inputText value="#{buyerBean.buyer.mail}" />
+<p:inputText value="#{buyerBean.buyer.mail}">
+<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+</p:inputText>
 <p:commandButton value="#{msg.addBuyer}" actionListener="#{buyerBean.saveBuyer}" icon="ui-icon-disk" update="growl"/>  
 </h:panelGrid>
  </p:panel>

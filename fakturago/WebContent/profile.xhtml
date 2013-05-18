@@ -8,8 +8,24 @@
  </ui:define>
 
 <ui:define name="content">
- <p:panel header="Edit your profile">
- This is a Primefaces panel
+<h:form>
+
+<p:growl id="growl" showDetail="true" sticky="true" />
+<p:panel header="Edit your profile">
+<h:panelGrid columns="2" cellpadding="5">
+<h:outputText value="#{msg.name} *" />
+<p:inputText value="#{sellerBean.seller.name}" required="true"/>
+<h:outputText value="#{msg.address} *" />
+<p:inputText value="#{sellerBean.seller.address}" required="true"/>
+<h:outputText value="#{msg.city} *" />
+<p:inputText value="#{sellerBean.seller.city}" required="true"/>
+<h:outputText value="#{msg.zip} *" />
+<p:inputMask value="#{sellerBean.seller.zip}" required="true" mask="99-999"/>
+<h:outputText value="#{msg.nip}" />
+<p:inputMask value="#{sellerBean.seller.nip}" required="true" mask="999-999-99-99"/>
+<p:commandButton value="Zapisz" action="#{sellerBean.edit}" icon="ui-icon-disk" update="growl"/>  
+</h:panelGrid>
  </p:panel>
+ </h:form>
  </ui:define>
 </ui:composition>  

@@ -5,10 +5,6 @@ import javax.persistence.*;
 import java.util.List;
 
 
-/**
- * The persistent class for the seller database table.
- * 
- */
 @Entity
 @Table(name="seller")
 public class Seller implements Serializable {
@@ -25,8 +21,6 @@ public class Seller implements Serializable {
 	private String name;
 
 	private String nip;
-
-	private String province;
 
 	private String zip;
 
@@ -75,14 +69,6 @@ public class Seller implements Serializable {
 
 	public void setNip(String nip) {
 		this.nip = nip;
-	}
-
-	public String getProvince() {
-		return this.province;
-	}
-
-	public void setProvince(String province) {
-		this.province = province;
 	}
 
 	public String getZip() {

@@ -8,8 +8,34 @@
  </ui:define>
 
 <ui:define name="content">
+<h:form id="form">  
  <p:panel header="Prepare invoice">
- This is a Primefaces panel
+ 
+ <h:outputText value="Faktura nr: "/>
+ <p:inputText value="#{invoiceBean.invoice.number}"/>
+ <br/>
+ <h4>Data wystawienia</h4>  
+ <p:calendar value="#{invoiceBean.invoice.dateOfDraft}" id="dcalandar" pattern="dd/MM/yyyy"/>
+ <h4>Data sprzedaży</h4>  
+ <p:calendar value="#{invoiceBean.invoice.dateOfDraft}" id="scalandar" pattern="dd/MM/yyyy"/>
+  <br/>
+  <br/>
+  <h:outputText value="Miejsce wystawienia" />  
+ <p:inputText value="#{invoiceBean.invoice.placeOfSell}" />
+ <br/>  
+            <p:selectOneMenu id="formOfPayment" value="#{invoiceBean.invoice.formOfPayment}">  
+                <f:selectItems value="#{invoiceBean.formsOfPayment}"/>   
+            </p:selectOneMenu> 
+            
+ <p:fieldset id="invoiceSeller" legend="Seller">   
+        <h:outputText value="#{invoiceBean.seller.name}" /> <br/>
+        <h:outputText value="#{invoiceBean.seller.address}" /> <br/> 
+        <h:outputText value="#{invoiceBean.seller.city}" />  <br/>
+        <h:outputText value="#{invoiceBean.seller.zip}" />  <br/>
+        <h:outputText value="#{invoiceBean.seller.nip}" />   
+</p:fieldset> 
  </p:panel>
+ 
+ </h:form>
  </ui:define>
 </ui:composition>  
