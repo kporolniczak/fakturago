@@ -5,13 +5,17 @@ import javax.persistence.*;
 import java.util.List;
 
 
+/**
+ * The persistent class for the seller database table.
+ * 
+ */
 @Entity
 @Table(name="seller")
 public class Seller implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
 	private String address;
@@ -21,6 +25,8 @@ public class Seller implements Serializable {
 	private String name;
 
 	private String nip;
+
+	private String province;
 
 	private String zip;
 
@@ -69,6 +75,14 @@ public class Seller implements Serializable {
 
 	public void setNip(String nip) {
 		this.nip = nip;
+	}
+
+	public String getProvince() {
+		return this.province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
 	}
 
 	public String getZip() {

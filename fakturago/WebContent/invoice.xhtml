@@ -9,15 +9,80 @@
 
 <ui:define name="content">
 <h:form id="form">  
+<p:growl id="messages" showDetail="true"/> 
  <p:panel header="Prepare invoice">
  
  <h:outputText value="Faktura nr: "/>
  <p:inputText value="#{invoiceBean.invoice.number}"/>
  <br/>
+ <p:outputPanel id="service">  
+ <p:dataTable id="lines" var="si" value="#{invoiceBean.tempServInv}">  
+        	<p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Name" />  
+                </f:facet>  
+                <h:outputText value="#{si.service.name}" />  
+            </p:column>    
+         <p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="PKWiU" />  
+                </f:facet>  
+                <h:outputText value="#{si.service.pkwiu}" />  
+            </p:column> 
+         <p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Ilość" />  
+                </f:facet>  
+                <h:outputText value="#{si.quantity}" />  
+            </p:column> 
+         <p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Jednostka" />  
+                </f:facet>  
+                <h:outputText value="#{si.service.unit}" />  
+            </p:column>
+         <p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Cena netto" />  
+                </f:facet>  
+                <h:outputText value="#{si.service.nettoPrice}" />  
+            </p:column>
+         <p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Rabat" />  
+                </f:facet>  
+                <h:outputText value="#{si.discount}" />  
+            </p:column>
+         <p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Stawka VAT" />  
+                </f:facet>  
+                <h:outputText value="#{si.service.vatRate}" />  
+            </p:column>
+         <p:column>   
+         		<f:facet name="header">  
+                    <h:outputText value="Wartość netto" />  
+                </f:facet> 
+                   <h:outputText value="#{invoiceBean.servinv.nettoValue}"/> 
+         </p:column> 
+         <p:column>  
+                <f:facet name="header">  
+                    <h:outputText value="Operation" />  
+                </f:facet>  
+                <p:commandLink value="Remove" update=":form:lines" process=":form:lines">  
+                    <p:collector value="#{lines}"  
+                                 removeFrom="#{invoiceBean.tempServInv}" />  
+                </p:commandLink>  
+            </p:column>  
+</p:dataTable>
+<p:commandButton id="selectButton" update=":form:display" oncomplete="carDialog.show()" icon="ui-icon-search" title="View">  
+                <f:setPropertyActionListener value="#{car}" target="#{invoiceBean.servinv}" />  
+            </p:commandButton> 
+</p:outputPanel>
  <h4>Data wystawienia</h4>  
  <p:calendar value="#{invoiceBean.invoice.dateOfDraft}" id="dcalandar" pattern="dd/MM/yyyy"/>
  <h4>Data sprzedaży</h4>  
- <p:calendar value="#{invoiceBean.invoice.dateOfDraft}" id="scalandar" pattern="dd/MM/yyyy"/>
+ <p:calendar value="#{invoiceBean.invoice.dateOfSell}" id="scalandar" pattern="dd/MM/yyyy"/>
   <br/>
   <br/>
   <h:outputText value="Miejsce wystawienia" />  
@@ -35,7 +100,42 @@
         <h:outputText value="#{invoiceBean.seller.nip}" />   
 </p:fieldset> 
  </p:panel>
- 
+<p:carousel id="buyersCarousel" value="#{buyerBean.buyersList}" var="buyer" itemStyleClass="buyerItem" numVisible="1">     
+   <h:panelGrid columns="1" style="width:100%" cellpadding="5" >            
+        	<h:outputText value="#{msg.name}: #{buyer.name}" />  
+    		<h:outputText value="#{msg.address}: #{buyer.address}" />  
+            <h:outputText value="#{msg.city}: #{buyer.city}" />  
+            <h:outputText value="#{msg.zip}: #{buyer.zip}" />  
+            <h:outputText value="#{msg.nip}: #{buyer.nip}" />  
+            <h:outputText value="#{msg.province}: #{buyer.province.name}" />  
+            <h:outputText value="#{msg.pesel}: #{buyer.pesel}" />  
+            <h:outputText value="#{msg.mail}: #{buyer.mail}" />  
+    </h:panelGrid>  
+</p:carousel> 
+<p:dialog header="Car Detail" widgetVar="carDialog" resizable="false" id="carDlg"  
+                showEffect="fade" hideEffect="explode" modal="true">  
+<h:panelGrid id="display" columns="2" cellpadding="5">
+       	<h:outputText value="Name" />
+        <p:inputText value="#{invoiceBean.servinv.service.name}"/>
+  		<h:outputText value="PKWiU" />
+        <p:inputText id="pkwiuInput" value="#{invoiceBean.servinv.service.pkwiu}"/>  
+ 		<h:outputText value="Ilość" />
+        <p:inputText id="quantityInput" value="#{invoiceBean.servinv.quantity}"/>
+  		<h:outputText value="Jednostka" /> 
+        <p:inputText id="unitInput" value="#{invoiceBean.servinv.service.unit}"/>
+  		<h:outputText value="Netto" />
+		<p:inputText id="nettoPriceInput" value="#{invoiceBean.servinv.service.nettoPrice}"/> 
+		<h:outputText value="Rabat" />  
+        <p:inputText id="discountInput" value="#{invoiceBean.servinv.discount}"/> 
+    	<h:outputText value="Stawka VAT" />
+        <p:inputText id="vatInput" value="#{invoiceBean.servinv.service.vatRate}"/> 
+        <p:commandButton id="btn_add" value="Add" update="lines @parent"  
+                            action="#{invoiceBean.reinit}" >
+        <p:collector value="#{invoiceBean.servinv}" addTo="#{invoiceBean.tempServInv}" />
+        </p:commandButton>
+        </h:panelGrid>
+  
+    </p:dialog> 
  </h:form>
  </ui:define>
 </ui:composition>  

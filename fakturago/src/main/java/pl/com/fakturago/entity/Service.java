@@ -16,33 +16,22 @@ public class Service implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-
-	private BigDecimal bruttoValue;
-
-	private BigDecimal discount;
+	
+	private String name;
 
 	private BigDecimal nettoPrice;
 
-	private BigDecimal nettoValue;
-
 	private String pkwiu;
-
-	private int quantity;
 
 	private String unit;
 
-	private BigDecimal vatValue;
+	private int vatRate;
 
-	//bi-directional many-to-one association to Invoice
+	//bi-directional many-to-one association to ServInv
 	@OneToMany(mappedBy="service")
-	private List<Invoice> invoices;
-
-	//bi-directional many-to-one association to Vat
-	@ManyToOne
-	@JoinColumn(name="fk_vatRate")
-	private Vat vat;
+	private List<ServInv> servInvs;
 
 	public Service() {
 	}
@@ -55,20 +44,12 @@ public class Service implements Serializable {
 		this.id = id;
 	}
 
-	public BigDecimal getBruttoValue() {
-		return this.bruttoValue;
+	public String getName() {
+		return name;
 	}
 
-	public void setBruttoValue(BigDecimal bruttoValue) {
-		this.bruttoValue = bruttoValue;
-	}
-
-	public BigDecimal getDiscount() {
-		return this.discount;
-	}
-
-	public void setDiscount(BigDecimal discount) {
-		this.discount = discount;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public BigDecimal getNettoPrice() {
@@ -79,28 +60,12 @@ public class Service implements Serializable {
 		this.nettoPrice = nettoPrice;
 	}
 
-	public BigDecimal getNettoValue() {
-		return this.nettoValue;
-	}
-
-	public void setNettoValue(BigDecimal nettoValue) {
-		this.nettoValue = nettoValue;
-	}
-
 	public String getPkwiu() {
 		return this.pkwiu;
 	}
 
 	public void setPkwiu(String pkwiu) {
 		this.pkwiu = pkwiu;
-	}
-
-	public int getQuantity() {
-		return this.quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
 	}
 
 	public String getUnit() {
@@ -111,42 +76,34 @@ public class Service implements Serializable {
 		this.unit = unit;
 	}
 
-	public BigDecimal getVatValue() {
-		return this.vatValue;
+	public int getVatRate() {
+		return this.vatRate;
 	}
 
-	public void setVatValue(BigDecimal vatValue) {
-		this.vatValue = vatValue;
+	public void setVatRate(int vatRate) {
+		this.vatRate = vatRate;
 	}
 
-	public List<Invoice> getInvoices() {
-		return this.invoices;
+	public List<ServInv> getServInvs() {
+		return this.servInvs;
 	}
 
-	public void setInvoices(List<Invoice> invoices) {
-		this.invoices = invoices;
+	public void setServInvs(List<ServInv> servInvs) {
+		this.servInvs = servInvs;
 	}
 
-	public Invoice addInvoice(Invoice invoice) {
-		getInvoices().add(invoice);
-		invoice.setService(this);
+	public ServInv addServInv(ServInv servInv) {
+		getServInvs().add(servInv);
+		servInv.setService(this);
 
-		return invoice;
+		return servInv;
 	}
 
-	public Invoice removeInvoice(Invoice invoice) {
-		getInvoices().remove(invoice);
-		invoice.setService(null);
+	public ServInv removeServInv(ServInv servInv) {
+		getServInvs().remove(servInv);
+		servInv.setService(null);
 
-		return invoice;
-	}
-
-	public Vat getVat() {
-		return this.vat;
-	}
-
-	public void setVat(Vat vat) {
-		this.vat = vat;
+		return servInv;
 	}
 
 }

@@ -2,8 +2,10 @@ package pl.com.fakturago.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -12,12 +14,15 @@ import java.util.Date;
  */
 @Entity
 @Table(name="invoice")
+@NamedQueries({
+	@NamedQuery(name = "Invoice.findAll", query = "SELECT i FROM Invoice i")
+	})
 public class Invoice implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Integer id;
 
 	@Temporal(TemporalType.DATE)
 	private Date dateOfDraft;
@@ -50,19 +55,18 @@ public class Invoice implements Serializable {
 	@JoinColumn(name="fk_seller")
 	private Seller seller;
 
-	//bi-directional many-to-one association to Service
-	@ManyToOne
-	@JoinColumn(name="fk_service")
-	private Service service;
+	//bi-directional many-to-one association to ServInv
+	@OneToMany(mappedBy="invoice")
+	private List<ServInv> servInvs;
 
 	public Invoice() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -154,12 +158,26 @@ public class Invoice implements Serializable {
 		this.seller = seller;
 	}
 
-	public Service getService() {
-		return this.service;
+	public List<ServInv> getServInvs() {
+		return this.servInvs;
 	}
 
-	public void setService(Service service) {
-		this.service = service;
+	public void setServInvs(List<ServInv> servInvs) {
+		this.servInvs = servInvs;
+	}
+
+	public ServInv addServInv(ServInv servInv) {
+		getServInvs().add(servInv);
+		servInv.setInvoice(this);
+
+		return servInv;
+	}
+
+	public ServInv removeServInv(ServInv servInv) {
+		getServInvs().remove(servInv);
+		servInv.setInvoice(null);
+
+		return servInv;
 	}
 
 }

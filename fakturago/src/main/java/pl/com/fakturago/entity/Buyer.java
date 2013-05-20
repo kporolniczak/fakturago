@@ -2,13 +2,8 @@ package pl.com.fakturago.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
-
-/**
- * The persistent class for the buyer database table.
- * 
- */
 @Entity
 @Table(name="buyer")
 @NamedQueries({
@@ -18,7 +13,7 @@ public class Buyer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 
 	private String address;
@@ -26,8 +21,7 @@ public class Buyer implements Serializable {
 	private String city;
 
 	private String mail;
-	
-	
+
 	private String name;
 
 	private String nip;
@@ -37,22 +31,18 @@ public class Buyer implements Serializable {
 	private String zip;
 
 	//bi-directional many-to-one association to Province
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="province",referencedColumnName="id")
+	@ManyToOne
+	@JoinColumn(name="province")
 	private Province province;
 
 	//bi-directional many-to-one association to Invoice
 	@OneToMany(mappedBy="buyer")
-	private Set<Invoice> invoices;
+	private List<Invoice> invoices;
 
 	public Buyer() {
 	}
-	
-	public Buyer(Integer id) {
-		this.id = id;
-	}
 
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
@@ -83,7 +73,7 @@ public class Buyer implements Serializable {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-	
+
 	public String getName() {
 		return this.name;
 	}
@@ -124,11 +114,11 @@ public class Buyer implements Serializable {
 		this.province = province;
 	}
 
-	public Set<Invoice> getInvoices() {
+	public List<Invoice> getInvoices() {
 		return this.invoices;
 	}
 
-	public void setInvoices(Set<Invoice> invoices) {
+	public void setInvoices(List<Invoice> invoices) {
 		this.invoices = invoices;
 	}
 
@@ -146,23 +136,4 @@ public class Buyer implements Serializable {
 		return invoice;
 	}
 
-	@Override
-	public boolean equals(Object object){
-		if(!(object instanceof Buyer)){
-			return false;
-		}
-		Buyer other = (Buyer) object;
-		if((this.id == null && other.id != null 
-				|| this.id != null && !this.id.equals(other.id))){
-		return false;
-		}
-		return true;
-		}
-	
-	@Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
 }

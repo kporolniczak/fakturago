@@ -2,13 +2,9 @@ package pl.com.fakturago.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Set;
 
+import java.util.List;
 
-/**
- * The persistent class for the province database table.
- * 
- */
 @Entity
 @Table(name="province")
 @NamedQueries({
@@ -18,14 +14,14 @@ public class Province implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 
 	private String name;
 
 	//bi-directional many-to-one association to Buyer
-	@OneToMany(mappedBy="province", fetch=FetchType.LAZY)
-	private Set<Buyer> buyers;
+	@OneToMany(mappedBy="province")
+	private List<Buyer> buyers;
 
 	public Province() {
 	}
@@ -46,11 +42,11 @@ public class Province implements Serializable {
 		this.name = name;
 	}
 
-	public Set<Buyer> getBuyers() {
+	public List<Buyer> getBuyers() {
 		return this.buyers;
 	}
 
-	public void setBuyers(Set<Buyer> buyers) {
+	public void setBuyers(List<Buyer> buyers) {
 		this.buyers = buyers;
 	}
 
@@ -67,16 +63,5 @@ public class Province implements Serializable {
 
 		return buyer;
 	}
-	@Override
-	public boolean equals(Object object){
-		if(!(object instanceof Province)){
-			return false;
-		}
-		Province other = (Province) object;
-		if((this.id == null && other.id != null 
-				|| this.id != null && !this.id.equals(other.id))){
-		return false;
-		}
-		return true;
-		}
+
 }
