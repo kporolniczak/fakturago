@@ -44,7 +44,7 @@ public class Line implements Serializable {
 
 	public Line() {
 	}
-
+	
 	public Integer getIdservInv() {
 		return this.idservInv;
 	}
@@ -117,4 +117,22 @@ public class Line implements Serializable {
 		this.invoice = invoice;
 	}
 
+	public BigDecimal getNettoValue(){
+		BigDecimal quantity = new BigDecimal(this.quantity);
+		BigDecimal sum = this.nettoPrice.multiply(quantity); 
+		BigDecimal discount = sum.multiply(this.discount);
+		discount = discount.divide(new BigDecimal(100));
+		return sum.subtract(discount);
+	}
+	
+	public BigDecimal getVatValue(){
+		BigDecimal vat = new BigDecimal(vatrate);
+		vat = vat.divide(new BigDecimal(100));
+		return this.getNettoValue().multiply(vat);
+		
+	}
+	
+	public BigDecimal getBruttoValue(){
+		return this.getNettoValue().add(this.getVatValue());
+	}
 }

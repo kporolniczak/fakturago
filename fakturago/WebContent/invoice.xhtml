@@ -59,18 +59,37 @@
                 </f:facet>  
                 <h:outputText value="#{line.vatrate}" />  
             </p:column>
-         <p:column>  
+         <p:column> 
+                <f:facet name="header">  
+                    <h:outputText value="Wartość netto" />  
+                </f:facet>  
+                <h:outputText value="#{line.nettoValue}" />  
+            </p:column> 
+         <p:column> 
+                <f:facet name="header">  
+                    <h:outputText value="Wartość vat" />  
+                </f:facet>  
+                <h:outputText value="#{line.vatValue}" />  
+            </p:column>
+            <p:column> 
+                <f:facet name="header">  
+                    <h:outputText value="Wartość brutto" />  
+                </f:facet>  
+                <h:outputText value="#{line.bruttoValue}" />  
+            </p:column>
+         <p:column> 
                 <f:facet name="header">  
                     <h:outputText value="Operation" />  
                 </f:facet>  
-                <p:commandLink value="Remove" update=":form:lines" process=":form:lines">  
+                <p:commandLink value="remove" update=":form:lines" process=":form:lines">  
+                 
                     <p:collector value="#{line}"  
                                  removeFrom="#{invoiceBean.lines}" />  
                 </p:commandLink>  
             </p:column>  
 </p:dataTable>
-<p:commandButton id="selectButton" update=":form:display" oncomplete="carDialog.show()" icon="ui-icon-search" title="View">  
-                <f:setPropertyActionListener value="#{car}" target="#{invoiceBean.line}" />  
+<p:commandButton value="Another line" id="selectButton" update=":form:display" oncomplete="lineDialog.show()" icon="ui-icon-newwin" title="View">  
+                <f:setPropertyActionListener value="#{none}" target="#{invoiceBean.line}" />  
             </p:commandButton> 
 </p:outputPanel>
  <h4>Data wystawienia</h4>  
@@ -106,7 +125,7 @@
             <h:outputText value="#{msg.mail}: #{buyer.mail}" />  
     </h:panelGrid>  
 </p:carousel> 
-<p:dialog header="Car Detail" widgetVar="carDialog" resizable="false" id="carDlg"  
+<p:dialog header="Add another line" widgetVar="lineDialog" resizable="false" id="lineDlg"  
                 showEffect="fade" hideEffect="explode" modal="true">  
 <h:panelGrid id="display" columns="2" cellpadding="5">
        	<h:outputText value="Name" />
