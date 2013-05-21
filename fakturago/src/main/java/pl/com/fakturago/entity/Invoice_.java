@@ -7,7 +7,7 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="Dali", date="2013-05-20T17:59:50.913+0200")
+@Generated(value="Dali", date="2013-05-21T14:04:04.976+0200")
 @StaticMetamodel(Invoice.class)
 public class Invoice_ {
 	public static volatile SingularAttribute<Invoice, Integer> id;
@@ -22,5 +22,5 @@ public class Invoice_ {
 	public static volatile SingularAttribute<Invoice, BigDecimal> total;
 	public static volatile SingularAttribute<Invoice, Buyer> buyer;
 	public static volatile SingularAttribute<Invoice, Seller> seller;
-	public static volatile ListAttribute<Invoice, ServInv> servInvs;
+	public static volatile ListAttribute<Invoice, Line> lines;
 }

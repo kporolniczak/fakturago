@@ -26,13 +26,16 @@ public class Seller implements Serializable {
 
 	private String nip;
 
-	private String province;
-
 	private String zip;
 
 	//bi-directional many-to-one association to Invoice
 	@OneToMany(mappedBy="seller")
 	private List<Invoice> invoices;
+
+	//bi-directional many-to-one association to Province
+	@ManyToOne
+	@JoinColumn(name="province")
+	private Province provinceBean;
 
 	public Seller() {
 	}
@@ -77,14 +80,6 @@ public class Seller implements Serializable {
 		this.nip = nip;
 	}
 
-	public String getProvince() {
-		return this.province;
-	}
-
-	public void setProvince(String province) {
-		this.province = province;
-	}
-
 	public String getZip() {
 		return this.zip;
 	}
@@ -113,6 +108,14 @@ public class Seller implements Serializable {
 		invoice.setSeller(null);
 
 		return invoice;
+	}
+
+	public Province getProvinceBean() {
+		return this.provinceBean;
+	}
+
+	public void setProvinceBean(Province provinceBean) {
+		this.provinceBean = provinceBean;
 	}
 
 }

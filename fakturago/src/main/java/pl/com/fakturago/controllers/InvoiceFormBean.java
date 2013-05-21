@@ -12,19 +12,25 @@ import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.SelectEvent;
 
 import pl.com.fakturago.config.DBManager;
-import pl.com.fakturago.entity.Buyer;
 import pl.com.fakturago.entity.Invoice;
+import pl.com.fakturago.entity.Line;
 import pl.com.fakturago.entity.Seller;
-import pl.com.fakturago.entity.ServInv;
 
 public class InvoiceFormBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
 	private Seller seller = new Seller();
 	private Invoice invoice = new Invoice();
-	private ServInv servinv = new ServInv();
 	private List <String>formsOfPayment = new ArrayList<String>();
-	private List<ServInv> tempServInv = new ArrayList<ServInv>();
+	private Line line;
+	private List <Line> lines = new ArrayList<Line>();
+	
+	//Constructors   
+	public InvoiceFormBean(Line line) {
+		this.line = line;
+	}
+	
 	public Seller getSeller() {
 		return seller;
 	}
@@ -49,25 +55,27 @@ public class InvoiceFormBean implements Serializable{
 		this.formsOfPayment = formsOfPayment;
 	}
 
-	public InvoiceFormBean(){	
+	public Line getLine() {
+		if(line == null)
+			line = new Line();
+		return line;
+	}
+
+	public void setLine(Line line) {
+		this.line = line;
+	}
+
+	public List<Line> getLines() {
+		return lines;
+	}
+
+	public void setLines(List<Line> lines) {
+		this.lines = lines;
+	}
+
+	public InvoiceFormBean(){
 	formsOfPayment.add("cash");
 	formsOfPayment.add("transfer");
-	}
-	
-	public ServInv getServinv() {
-		return servinv;
-	}
-
-	public void setServinv(ServInv servinv) {
-		this.servinv = servinv;
-	}
-
-	public List<ServInv> getTempServInv() {
-		return tempServInv;
-	}
-
-	public void setTempServInv(List<ServInv> tempServInv) {
-		this.tempServInv = tempServInv;
 	}
 
 	public String loadToEdit(){
@@ -84,12 +92,6 @@ public class InvoiceFormBean implements Serializable{
 		return list;
 	}
 	
-	public List<ServInv> getServInvList(){
-		EntityManager em = DBManager.getManager().createEntityManager();
-		List list = em.createNamedQuery("ServInv.findAll").getResultList();
-		return list;
-	}
-	
 	public void onCellEdit(CellEditEvent event) {  
         Object oldValue = event.getOldValue();  
         Object newValue = event.getNewValue();  
@@ -100,14 +102,25 @@ public class InvoiceFormBean implements Serializable{
         }  
     }  
 	public String reinit() {  
-        servinv = new ServInv();        
-        return null;  
+        line = new Line();         
+        return "./invoice.xhtml";  
     }  
-	
 	public void onDialogReturn(SelectEvent event) {  
-        ServInv servInv = (ServInv) event.getObject();  
+        Line line = (Line) event.getObject();  
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Car Selected", "Model:");  
-
         FacesContext.getCurrentInstance().addMessage(null, message);  
-    }  
+    } 
+	
+	public String addLine(Line line) {
+		Line newLine = new Line();
+		newLine.setName(invoice.getNumber());
+		lines.add(newLine);
+		return "./index.xhtml";
+	}
+
+	public InvoiceFormBean(Seller seller, Invoice invoice, Line line) {
+		this.seller = seller;
+		this.invoice = invoice;
+		this.line = line;
+	}
 }

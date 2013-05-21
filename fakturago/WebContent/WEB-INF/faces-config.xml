@@ -11,17 +11,17 @@
   <managed-bean-class>pl.com.fakturago.controllers.BuyerFormBean</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
-  <managed-bean>
+ <managed-bean>
   <managed-bean-name>sellerBean</managed-bean-name>
   <managed-bean-class>pl.com.fakturago.controllers.SellerFormBean</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
-  <managed-bean>
+ <managed-bean>
   <managed-bean-name>invoiceBean</managed-bean-name>
   <managed-bean-class>pl.com.fakturago.controllers.InvoiceFormBean</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
-  <managed-bean>
+ <managed-bean>
   <managed-bean-name>provinceBean</managed-bean-name>
   <managed-bean-class>pl.com.fakturago.controllers.ProvinceBean</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>

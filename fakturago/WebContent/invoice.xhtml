@@ -16,67 +16,61 @@
  <p:inputText value="#{invoiceBean.invoice.number}"/>
  <br/>
  <p:outputPanel id="service">  
- <p:dataTable id="lines" var="si" value="#{invoiceBean.tempServInv}">  
+ <p:dataTable id="lines" var="line" value="#{invoiceBean.lines}">  
         	<p:column>  
                 <f:facet name="header">  
                     <h:outputText value="Name" />  
                 </f:facet>  
-                <h:outputText value="#{si.service.name}" />  
+                <h:outputText value="#{line.name}" />  
             </p:column>    
          <p:column>  
                 <f:facet name="header">  
                     <h:outputText value="PKWiU" />  
                 </f:facet>  
-                <h:outputText value="#{si.service.pkwiu}" />  
+                <h:outputText value="#{line.pkwiu}" />  
             </p:column> 
          <p:column>  
                 <f:facet name="header">  
                     <h:outputText value="Ilość" />  
                 </f:facet>  
-                <h:outputText value="#{si.quantity}" />  
+                <h:outputText value="#{line.quantity}" />  
             </p:column> 
          <p:column>  
                 <f:facet name="header">  
                     <h:outputText value="Jednostka" />  
                 </f:facet>  
-                <h:outputText value="#{si.service.unit}" />  
+                <h:outputText value="#{line.unit}" />  
             </p:column>
          <p:column>  
                 <f:facet name="header">  
                     <h:outputText value="Cena netto" />  
                 </f:facet>  
-                <h:outputText value="#{si.service.nettoPrice}" />  
+                <h:outputText value="#{line.nettoPrice}" />  
             </p:column>
          <p:column>  
                 <f:facet name="header">  
                     <h:outputText value="Rabat" />  
                 </f:facet>  
-                <h:outputText value="#{si.discount}" />  
+                <h:outputText value="#{line.discount}" />  
             </p:column>
          <p:column>  
                 <f:facet name="header">  
                     <h:outputText value="Stawka VAT" />  
                 </f:facet>  
-                <h:outputText value="#{si.service.vatRate}" />  
+                <h:outputText value="#{line.vatrate}" />  
             </p:column>
-         <p:column>   
-         		<f:facet name="header">  
-                    <h:outputText value="Wartość netto" />  
-                </f:facet> 
-                   <h:outputText value="#{invoiceBean.servinv.nettoValue}"/> 
-         </p:column> 
          <p:column>  
                 <f:facet name="header">  
                     <h:outputText value="Operation" />  
                 </f:facet>  
                 <p:commandLink value="Remove" update=":form:lines" process=":form:lines">  
-                    <p:collector value="#{lines}"  
-                                 removeFrom="#{invoiceBean.tempServInv}" />  
+                    <p:collector value="#{line}"  
+                                 removeFrom="#{invoiceBean.lines}" />  
                 </p:commandLink>  
             </p:column>  
 </p:dataTable>
 <p:commandButton id="selectButton" update=":form:display" oncomplete="carDialog.show()" icon="ui-icon-search" title="View">  
-                <f:setPropertyActionListener value="#{car}" target="#{invoiceBean.servinv}" />  
+                <f:setPropertyActionListener value="#{car}" target="#{invoiceBean.line}" />  
             </p:commandButton> 
 </p:outputPanel>
  <h4>Data wystawienia</h4>  
@@ -116,22 +110,22 @@
                 showEffect="fade" hideEffect="explode" modal="true">  
 <h:panelGrid id="display" columns="2" cellpadding="5">
        	<h:outputText value="Name" />
-        <p:inputText value="#{invoiceBean.servinv.service.name}"/>
+        <p:inputText value="#{invoiceBean.line.name}"/>
   		<h:outputText value="PKWiU" />
-        <p:inputText id="pkwiuInput" value="#{invoiceBean.servinv.service.pkwiu}"/>  
+        <p:inputText id="pkwiuInput" value="#{invoiceBean.line.pkwiu}"/>  
  		<h:outputText value="Ilość" />
-        <p:inputText id="quantityInput" value="#{invoiceBean.servinv.quantity}"/>
+        <p:inputText id="quantityInput" value="#{invoiceBean.line.quantity}"/>
   		<h:outputText value="Jednostka" /> 
-        <p:inputText id="unitInput" value="#{invoiceBean.servinv.service.unit}"/>
+        <p:inputText id="unitInput" value="#{invoiceBean.line.unit}"/>
   		<h:outputText value="Netto" />
-		<p:inputText id="nettoPriceInput" value="#{invoiceBean.servinv.service.nettoPrice}"/> 
+		<p:inputText id="nettoPriceInput" value="#{invoiceBean.line.nettoPrice}"/> 
 		<h:outputText value="Rabat" />  
-        <p:inputText id="discountInput" value="#{invoiceBean.servinv.discount}"/> 
+        <p:inputText id="discountInput" value="#{invoiceBean.line.discount}"/> 
     	<h:outputText value="Stawka VAT" />
-        <p:inputText id="vatInput" value="#{invoiceBean.servinv.service.vatRate}"/> 
+        <p:inputText id="vatInput" value="#{invoiceBean.line.vatrate}"/> 
         <p:commandButton id="btn_add" value="Add" update="lines @parent"  
                             action="#{invoiceBean.reinit}" >
-        <p:collector value="#{invoiceBean.servinv}" addTo="#{invoiceBean.tempServInv}" />
+        <p:collector value="#{invoiceBean.line}" addTo="#{invoiceBean.lines}" />
         </p:commandButton>
         </h:panelGrid>
   

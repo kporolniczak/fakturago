@@ -27,7 +27,6 @@ public class BuyerFormBean implements Serializable {
 	
      //Constructors   
 	public BuyerFormBean() {
-		super();
 	}
 	
 	public BuyerFormBean(Buyer buyer) {
