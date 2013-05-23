@@ -28,7 +28,7 @@ public class Province implements Serializable {
 	private List<Buyer> buyers;
 
 	//bi-directional many-to-one association to Seller
-	@OneToMany(mappedBy="provinceBean")
+	@OneToMany(mappedBy="province")
 	private List<Seller> sellers;
 
 	public Province() {
@@ -82,16 +82,28 @@ public class Province implements Serializable {
 
 	public Seller addSeller(Seller seller) {
 		getSellers().add(seller);
-		seller.setProvinceBean(this);
+		seller.setProvince(this);
 
 		return seller;
 	}
 
 	public Seller removeSeller(Seller seller) {
 		getSellers().remove(seller);
-		seller.setProvinceBean(null);
+		seller.setProvince(null);
 
 		return seller;
 	}
 
+	@Override
+	public boolean equals(Object object){
+		if(!(object instanceof Province)){
+			return false;
+		}
+		Province other = (Province) object;
+		if((this.id == null && other.id != null 
+				|| this.id != null && !this.id.equals(other.id))){
+		return false;
+		}
+		return true;
+		}
 }

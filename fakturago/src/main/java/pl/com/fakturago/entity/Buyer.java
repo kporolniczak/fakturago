@@ -140,5 +140,17 @@ public class Buyer implements Serializable {
 
 		return invoice;
 	}
-
+	
+	@Override
+	public boolean equals(Object object){
+		if(!(object instanceof Buyer)){
+			return false;
+		}
+		Buyer other = (Buyer) object;
+		if((this.id == null && other.id != null 
+				|| this.id != null && !this.id.equals(other.id))){
+		return false;
+		}
+		return true;
+		}
 }

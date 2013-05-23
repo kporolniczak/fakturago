@@ -1,14 +1,15 @@
 package pl.com.fakturago.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-/**
- * The persistent class for the seller database table.
- * 
- */
 @Entity
 @Table(name="seller")
 public class Seller implements Serializable {
@@ -16,7 +17,7 @@ public class Seller implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Integer id;
 
 	private String address;
 
@@ -28,23 +29,19 @@ public class Seller implements Serializable {
 
 	private String zip;
 
-	//bi-directional many-to-one association to Invoice
-	@OneToMany(mappedBy="seller")
-	private List<Invoice> invoices;
-
 	//bi-directional many-to-one association to Province
 	@ManyToOne
 	@JoinColumn(name="province")
-	private Province provinceBean;
+	private Province province;
 
 	public Seller() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -88,34 +85,12 @@ public class Seller implements Serializable {
 		this.zip = zip;
 	}
 
-	public List<Invoice> getInvoices() {
-		return this.invoices;
+	public Province getProvince() {
+		return this.province;
 	}
 
-	public void setInvoices(List<Invoice> invoices) {
-		this.invoices = invoices;
-	}
-
-	public Invoice addInvoice(Invoice invoice) {
-		getInvoices().add(invoice);
-		invoice.setSeller(this);
-
-		return invoice;
-	}
-
-	public Invoice removeInvoice(Invoice invoice) {
-		getInvoices().remove(invoice);
-		invoice.setSeller(null);
-
-		return invoice;
-	}
-
-	public Province getProvinceBean() {
-		return this.provinceBean;
-	}
-
-	public void setProvinceBean(Province provinceBean) {
-		this.provinceBean = provinceBean;
+	public void setProvince(Province province) {
+		this.province = province;
 	}
 
 }

@@ -101,16 +101,22 @@ public class BuyerFormBean implements Serializable {
 	}
 	
 	public void onRowSelect(SelectEvent event) {  
-        FacesMessage msg = new FacesMessage("Buyer Selected", ((Buyer) event.getObject()).getName());  
-  
+        FacesMessage msg = new FacesMessage("Buyer Selected",
+        		((Buyer) event.getObject()).getName());  
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }  
   
     public void onRowUnselect(UnselectEvent event) {  
-        FacesMessage msg = new FacesMessage("Buyer Unselected", ((Buyer) event.getObject()).getName());  
-  
+        FacesMessage msg = new FacesMessage("Buyer Unselected", 
+        		((Buyer) event.getObject()).getName());  
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }  
- 
+    public String swicthToBuyersList(){
+		return "./buyersList.xhtml";
+	}
+	
+	public String swicthToAddBuyer(){
+		return "./addBuyer.xhtml";
+	}
 }
 

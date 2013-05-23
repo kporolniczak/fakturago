@@ -11,29 +11,26 @@
       
     <h:body>  
         <h:form>  
-        <h:panelGrid columns="2" cellpadding="5">
+        <h:panelGrid id="display" columns="2" cellpadding="5">
        	<h:outputText value="Name" />
-        <p:inputText value="#{invoiceBean.line.name}"/>
+        <p:inputText value="#{invoiceBean.invoice.line.name}"/>
   		<h:outputText value="PKWiU" />
-        <p:inputText id="pkwiuInput" value="#{invoiceBean.line.pkwiu}"/>  
+        <p:inputText id="pkwiuInput" value="#{invoiceBean.invoice.line.pkwiu}"/>  
  		<h:outputText value="Ilość" />
-        <p:inputText id="quantityInput" value="#{invoiceBean.line.quantity}"/>
+        <p:inputText id="quantityInput" value="#{invoiceBean.invoice.line.quantity}"/>
   		<h:outputText value="Jednostka" /> 
-        <p:inputText id="unitInput" value="#{invoiceBean.line.unit}"/>
+        <p:inputText id="unitInput" value="#{invoiceBean.invoice.line.unit}"/>
   		<h:outputText value="Netto" />
-		<p:inputText id="nettoPriceInput" value="#{invoiceBean.line.nettoPrice}"/> 
+		<p:inputText id="nettoPriceInput" value="#{invoiceBean.invoice.line.nettoPrice}"/> 
 		<h:outputText value="Rabat" />  
-        <p:inputText id="discountInput" value="#{invoiceBean.line.discount}"/> 
+        <p:inputText id="discountInput" value="#{invoiceBean.invoice.line.discount}"/> 
     	<h:outputText value="Stawka VAT" />
-        <p:inputText id="vatInput" value="#{invoiceBean.line.vatrate}"/> 
-        <p:commandButton id="btn_add" value="Add"
-                            action="#{invoiceBean.addLine}" >
-    
+        <p:inputText id="vatInput" value="#{invoiceBean.invoice.line.vatrate}"/> 
+        <p:commandButton id="btn_add" value="Add" 
+                            action="#{invoiceBean.reinit}" >
+        <p:collector value="#{invoiceBean.invoice.line}" addTo="#{invoiceBean.invoice.lines}" />
         </p:commandButton>
         </h:panelGrid>
-        <h:panelGrid>
-				<h:messages showDetail="#{true}" showSummary="#{false}" />
-			</h:panelGrid>
 </h:form>
     </h:body>  
 </ui:composition>  

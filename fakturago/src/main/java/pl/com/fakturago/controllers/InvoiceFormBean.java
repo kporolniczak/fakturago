@@ -6,11 +6,12 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.SelectEvent;
-
 import pl.com.fakturago.config.DBManager;
 import pl.com.fakturago.entity.Invoice;
 import pl.com.fakturago.entity.Line;
@@ -122,5 +123,22 @@ public class InvoiceFormBean implements Serializable{
 		this.seller = seller;
 		this.invoice = invoice;
 		this.line = line;
+	}
+	
+	public String saveInvoice(ActionEvent ae){
+
+		EntityManager em = DBManager.getManager().createEntityManager();
+		FacesContext context = FacesContext.getCurrentInstance();
+		em.getTransaction().begin();
+		invoice.setId(null);
+		em.merge(invoice);
+		em.getTransaction().commit();
+		em.close();
+		context.addMessage(null, 
+				new FacesMessage("Invoice saved", "You successfully saved new invoice")); 	
+		this.invoice = new Invoice();
+		this.line = new Line();
+		this.line.setInvoice(new Invoice());
+		return null;
 	}
 }

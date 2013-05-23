@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 
 /**
@@ -38,13 +39,32 @@ public class Line implements Serializable {
 	private int vatrate;
 
 	//bi-directional many-to-one association to Invoice
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="fk_invoice", referencedColumnName="id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="fk_invoice", referencedColumnName = "id", 
+	insertable=false, updatable=false, nullable = false)
 	private Invoice invoice;
 
 	public Line() {
 	}
 	
+	public Line(Invoice invoice){
+		this.invoice = new Invoice();
+	}
+	
+	public Line(Integer idservInv, BigDecimal discount, String name,
+			BigDecimal nettoPrice, String pkwiu, int quantity, String unit,
+			int vatrate, Invoice invoice) {
+		this.idservInv = idservInv;
+		this.discount = discount;
+		this.name = name;
+		this.nettoPrice = nettoPrice;
+		this.pkwiu = pkwiu;
+		this.quantity = quantity;
+		this.unit = unit;
+		this.vatrate = vatrate;
+		this.invoice = invoice;
+	}
+
 	public Integer getIdservInv() {
 		return this.idservInv;
 	}
@@ -122,17 +142,18 @@ public class Line implements Serializable {
 		BigDecimal sum = this.nettoPrice.multiply(quantity); 
 		BigDecimal discount = sum.multiply(this.discount);
 		discount = discount.divide(new BigDecimal(100));
-		return sum.subtract(discount);
+		return (sum.subtract(discount)).setScale(2, RoundingMode.HALF_UP);
 	}
-	
+
 	public BigDecimal getVatValue(){
 		BigDecimal vat = new BigDecimal(vatrate);
 		vat = vat.divide(new BigDecimal(100));
-		return this.getNettoValue().multiply(vat);
-		
+		return (this.getNettoValue().multiply(vat)).setScale(2, RoundingMode.HALF_UP);
+
+	}
+
+	public BigDecimal getBruttoValue(){
+		return (this.getNettoValue().add(this.getVatValue())).setScale(2, RoundingMode.HALF_UP);
 	}
 	
-	public BigDecimal getBruttoValue(){
-		return this.getNettoValue().add(this.getVatValue());
-	}
 }
