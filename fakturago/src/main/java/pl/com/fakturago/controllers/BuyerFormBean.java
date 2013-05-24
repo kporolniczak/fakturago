@@ -58,8 +58,8 @@ public class BuyerFormBean implements Serializable {
 		em.getTransaction().commit();
 		em.close();
 		this.buyer = new Buyer();
-		context.addMessage(null, new FacesMessage("Buyer added", "You successfully added new buyer")); 
-		return null;
+		context.addMessage(null, new FacesMessage("Buyer added", "You successfully added new buyer"));
+		return "./buyersList.xhtml";
 	}
 	
 	public String deleteBuyer(){
@@ -118,5 +118,6 @@ public class BuyerFormBean implements Serializable {
 	public String swicthToAddBuyer(){
 		return "./addBuyer.xhtml";
 	}
+	 
 }
 

@@ -26,17 +26,20 @@
         <p:column headerText="#{msg.address}">  
             <h:outputText value="#{buyer.address}" />  
         </p:column> 
-        <p:column headerText="Actions">  
-            <f:facet name="header">Actions</f:facet>
-			<h:commandLink value="Usuń" action="#{buyerBean.deleteBuyer}" 
+        <p:column>  
+			<h:commandLink id="delete" action="#{buyerBean.deleteBuyer}" 
 			actionListener="#{buyerBean.buyerListener}">
+			<h:graphicImage value="/resources/images/del.png" />
 			<f:param name="Id" value="#{buyer.id}" />
 			</h:commandLink> 
+			<p:tooltip for="delete" value="Delete" showEffect="slide" hideEffect="slide" />
 			<p:spacer width="20" />
-			<h:commandLink value="Edytuj" action="#{buyerBean.loadToEdit}" 
+			<h:commandLink id="edit" action="#{buyerBean.loadToEdit}" 
 			actionListener="#{buyerBean.buyerListener}">
+			<h:graphicImage value="/resources/images/edit.png" />
 			<f:param name="Id" value="#{buyer.id}" />
-			</h:commandLink> 
+			</h:commandLink>
+			<p:tooltip for="edit" value="Edit" showEffect="slide" hideEffect="slide" /> 
         </p:column> 
 
 </p:dataTable> 

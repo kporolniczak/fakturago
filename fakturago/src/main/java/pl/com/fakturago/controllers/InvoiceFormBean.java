@@ -9,9 +9,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.SelectEvent;
+
 import pl.com.fakturago.config.DBManager;
 import pl.com.fakturago.entity.Invoice;
 import pl.com.fakturago.entity.Line;
@@ -75,8 +75,8 @@ public class InvoiceFormBean implements Serializable{
 	}
 
 	public InvoiceFormBean(){
-	formsOfPayment.add("cash");
-	formsOfPayment.add("transfer");
+	formsOfPayment.add("gotówka");
+	formsOfPayment.add("przelew");
 	}
 
 	public String loadToEdit(){
@@ -106,11 +106,6 @@ public class InvoiceFormBean implements Serializable{
         line = new Line();         
         return "./invoice.xhtml";  
     }  
-	public void onDialogReturn(SelectEvent event) {  
-        Line line = (Line) event.getObject();  
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Car Selected", "Model:");  
-        FacesContext.getCurrentInstance().addMessage(null, message);  
-    } 
 	
 	public String addLine(Line line) {
 		Line newLine = new Line();
@@ -137,8 +132,6 @@ public class InvoiceFormBean implements Serializable{
 		context.addMessage(null, 
 				new FacesMessage("Invoice saved", "You successfully saved new invoice")); 	
 		this.invoice = new Invoice();
-		this.line = new Line();
-		this.line.setInvoice(new Invoice());
 		return null;
 	}
 }
