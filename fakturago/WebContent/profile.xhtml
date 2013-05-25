@@ -24,7 +24,7 @@
 <p:inputMask value="#{sellerBean.seller.zip}" required="true" mask="99-999"/>
 <h:outputText value="#{msg.nip}" />
 <p:inputMask value="#{sellerBean.seller.nip}" required="true" mask="999-999-99-99"/>
-<p:commandButton value="Zapisz" action="#{sellerBean.edit}" icon="ui-icon-disk" update="growl"/>  
+<p:commandButton value="Zapisz" actionListener="#{sellerBean.edit}" icon="ui-icon-disk" update="growl"/>  
 </h:panelGrid>
  </p:panel>
  </h:form>

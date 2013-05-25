@@ -5,11 +5,16 @@
 }
 
 body{
-	margin: 10px 100px;
+	margin: 10px 120px;
 	background-image:url('../images/bg02.jpg');
 	
 }
 
 input {
    border-style: hidden !important;
+}
+
+.ui-dialog{
+top: 100px !important;
+position: fixed;
 }

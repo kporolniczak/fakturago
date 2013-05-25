@@ -56,20 +56,22 @@ public class BuyerFormBean implements Serializable {
 		buyer.setId(null);
 		em.merge(buyer);
 		em.getTransaction().commit();
-		em.close();
+		em.close();	
+		context.addMessage(null, new FacesMessage("Dodano użytkownika", "Udało Ci się dodać użytkownika"));
 		this.buyer = new Buyer();
-		context.addMessage(null, new FacesMessage("Buyer added", "You successfully added new buyer"));
-		return "./buyersList.xhtml";
+		return null;
 	}
 	
 	public String deleteBuyer(){
 		EntityManager em = DBManager.getManager().createEntityManager(); 
+		FacesContext context = FacesContext.getCurrentInstance();
 		em.getTransaction().begin();
 		this.buyer = em.find(Buyer.class, buyer.getId());
 		em.remove(this.buyer);
 		this.buyer = new Buyer();
 		em.getTransaction().commit();
 		em.close();	
+		context.addMessage(null, new FacesMessage("Usunięto użytkownika", "Udało Ci się usunąć użytkownika"));
 		return null;
 	}
 	
@@ -101,13 +103,13 @@ public class BuyerFormBean implements Serializable {
 	}
 	
 	public void onRowSelect(SelectEvent event) {  
-        FacesMessage msg = new FacesMessage("Buyer Selected",
+        FacesMessage msg = new FacesMessage("Wybrano nabywcę",
         		((Buyer) event.getObject()).getName());  
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }  
   
     public void onRowUnselect(UnselectEvent event) {  
-        FacesMessage msg = new FacesMessage("Buyer Unselected", 
+        FacesMessage msg = new FacesMessage("Cofnięto wybór", 
         		((Buyer) event.getObject()).getName());  
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }  
@@ -116,8 +118,9 @@ public class BuyerFormBean implements Serializable {
 	}
 	
 	public String swicthToAddBuyer(){
+		this.buyer = new Buyer();
 		return "./addBuyer.xhtml";
 	}
-	 
+
 }
 

@@ -12,10 +12,10 @@
 <h:form id="form">  
 <p:growl id="messages" showDetail="true"/> 
  <p:panel id="invoice" header="Faktura">
- <h:panelGrid id="top" columns="5" cellpadding="5">
- <h:outputText style="margin-left:50px;" value="Faktura nr: "/>
- <p:inputText value="#{invoiceBean.invoice.number}" required="true"/>
- <h:outputText style="margin-left:300px;"/>
+ <h:panelGrid id="top" columns="5"  width="100%">
+ <h:outputText style="margin-left:30px;" value="Faktura nr: "/>
+ <p:inputText value="#{invoiceBean.invoice.number}"/>
+ <p:spacer width="150px" height="1px"/>
 <h:outputText value="Data wystawienia"/> 
  <p:calendar value="#{invoiceBean.invoice.dateOfDraft}" id="dcalandar" pattern="dd/MM/yyyy"/>
  <h:outputText />
@@ -30,7 +30,7 @@
  <p:inputText value="#{invoiceBean.invoice.placeOfSell}" />
  </h:panelGrid>
  <p:separator style="width:100%;height:2px" /> 
-  <h:panelGrid id="names" columns="3" cellpadding="20">
+  <h:panelGrid id="names" columns="2" cellpadding="20" width="100%">
   <p:fieldset id="invoiceSeller" legend="Sprzedający" style="border-style: none !important; margin-left:100px;"> 
   		<h:panelGrid id="seller" columns="1" cellpadding="5">  
         <h:outputText value="Nazwa: #{invoiceBean.seller.name}" /> 
@@ -51,10 +51,9 @@
         <h:outputText />
         </h:panelGrid> 
 </p:fieldset> 
-<p:spacer width="200px" />
 <p:fieldset legend="Nabywca" style="border-style: none !important;"> 
 <p:carousel id="buyersCarousel" value="#{buyerBean.buyersList}" 
-var="buyer" itemStyleClass="buyerItem" style="border-style: none !important;" 
+var="buyer" itemStyleClass="buyerItem" style="border-style: none !important; clear: right" 
 numVisible="1" vertical="true" itemStyle="width:300px">
 <p:commandLink actionListener="#{invoiceBean.invoice.buyer}"/>     
    <h:panelGrid columns="1" style="width:100%" cellpadding="5" >            
@@ -77,7 +76,8 @@ numVisible="1" vertical="true" itemStyle="width:300px">
 </h:panelGrid>
 <p:separator style="width:100%;height:2px" /> 
  <p:outputPanel id="service">  
- <p:dataTable id="lines" var="line" value="#{invoiceBean.invoice.lines}">  
+ <p:dataTable id="lines" width="90%"
+ var="line" value="#{invoiceBean.invoice.lines}">  
         	<p:column>  
                 <f:facet name="header">  
                     <h:outputText value="Nazwa" />  
@@ -98,7 +98,7 @@ numVisible="1" vertical="true" itemStyle="width:300px">
             </p:column> 
          <p:column>  
                 <f:facet name="header">  
-                    <h:outputText value="Jednostka" />  
+                    <h:outputText value="Jedn." />  
                 </f:facet>  
                 <h:outputText value="#{line.unit}" />  
             </p:column>
@@ -110,7 +110,7 @@ numVisible="1" vertical="true" itemStyle="width:300px">
             </p:column>
          <p:column>  
                 <f:facet name="header">  
-                    <h:outputText value="Rabat w %" />  
+                    <h:outputText value="Rabat" />  
                 </f:facet>  
                 <h:outputText value="#{line.discount}" />  
             </p:column>
@@ -122,19 +122,19 @@ numVisible="1" vertical="true" itemStyle="width:300px">
             </p:column>
          <p:column> 
                 <f:facet name="header">  
-                    <h:outputText value="Wartość netto" />  
+                    <h:outputText value="Wart. netto" />  
                 </f:facet>  
                 <h:outputText value="#{line.nettoValue}" />  
             </p:column> 
          <p:column> 
                 <f:facet name="header">  
-                    <h:outputText value="Wartość vat" />  
+                    <h:outputText value="Wart. vat" />  
                 </f:facet>  
                 <h:outputText value="#{line.vatValue}" />  
             </p:column>
             <p:column> 
                 <f:facet name="header">  
-                    <h:outputText value="Wartość brutto" />  
+                    <h:outputText value="Wart. brutto" />  
                 </f:facet>  
                 <h:outputText value="#{line.bruttoValue}" />  
             </p:column>
@@ -175,8 +175,8 @@ numVisible="1" vertical="true" itemStyle="width:300px">
 <p:commandButton value="Zapisz" actionListener="#{invoiceBean.saveInvoice}" icon="ui-icon-disk" update="messages"/>
  </p:panel>
 
-<p:dialog header="Add another line" widgetVar="lineDialog" resizable="false" id="lineDlg"  
-                showEffect="fade" hideEffect="explode" modal="true">  
+<p:dialog header="Add another line" widgetVar="lineDialog" id="lineDlg" appendToBody="false" 
+                showEffect="fade" hideEffect="explode" modal="true" resizable="false">  
 <h:panelGrid id="display" columns="2" cellpadding="5">
        	<h:outputText value="Name" />
         <p:inputText value="#{invoiceBean.invoice.line.name}"/>

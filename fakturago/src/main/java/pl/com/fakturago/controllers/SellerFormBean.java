@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 
 import pl.com.fakturago.config.DBManager;
@@ -31,7 +32,7 @@ public class SellerFormBean implements Serializable {
 		return "./profile.xhtml";
 	}
 	
-	public String edit(){
+	public String edit(ActionEvent ae){
 		EntityManager em = DBManager.getManager().createEntityManager();
 		FacesContext context = FacesContext.getCurrentInstance();
 		em.getTransaction().begin();
@@ -40,7 +41,7 @@ public class SellerFormBean implements Serializable {
 		em.close();
 		this.seller = new Seller();
 		context.addMessage(null, 
-				new FacesMessage("Profile updated", "You successfully updated your profile"));
+				new FacesMessage("Profile uaktualniony", "Udało Ci się uaktualnić swoje dane"));
 		return null;
 	}
 

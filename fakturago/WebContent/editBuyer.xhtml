@@ -34,7 +34,7 @@
 <p:inputMask value="#{buyerBean.buyer.pesel}" mask="99999999999"/>
 <h:outputText value="#{msg.mail}" />
 <p:inputText value="#{buyerBean.buyer.mail}">
-<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+<f:validateRegex pattern="([\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z])?" />
 </p:inputText>
 <p:commandButton value="Zapisz" action="#{buyerBean.edit}" icon="ui-icon-disk" update="growl"/> 
 </h:panelGrid>

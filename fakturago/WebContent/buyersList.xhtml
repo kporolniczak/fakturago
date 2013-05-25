@@ -10,7 +10,7 @@
 
 <ui:define name="content">
 <h:form id="list"> 
-<p:growl id="growl" showDetail="true"/> 
+<p:growl id="growl" showDetail="true" sticky="true"/> 
  <p:panel header="List of Buyers">
 <p:dataTable var="buyer" value="#{buyerBean.buyersList}" paginator="true" rows="15" 
  rowKey="#{buyer.name}" selection="#{buyerBean.buyer}" selectionMode="single"> 
@@ -35,7 +35,7 @@
 			<p:tooltip for="delete" value="Delete" showEffect="slide" hideEffect="slide" />
 			<p:spacer width="20" />
 			<h:commandLink id="edit" action="#{buyerBean.loadToEdit}" 
-			actionListener="#{buyerBean.buyerListener}">
+			actionListener="#{buyerBean.buyerListener}" update="growl">
 			<h:graphicImage value="/resources/images/edit.png" />
 			<f:param name="Id" value="#{buyer.id}" />
 			</h:commandLink>

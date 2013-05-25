@@ -10,7 +10,6 @@ import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 
 import org.primefaces.event.CellEditEvent;
-import org.primefaces.event.SelectEvent;
 
 import pl.com.fakturago.config.DBManager;
 import pl.com.fakturago.entity.Invoice;

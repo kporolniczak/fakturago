@@ -9,7 +9,7 @@
  <managed-bean>
   <managed-bean-name>buyerBean</managed-bean-name>
   <managed-bean-class>pl.com.fakturago.controllers.BuyerFormBean</managed-bean-class>
-  <managed-bean-scope>session</managed-bean-scope>
+  <managed-bean-scope>request</managed-bean-scope>
  </managed-bean>
  <managed-bean>
   <managed-bean-name>sellerBean</managed-bean-name>
@@ -26,11 +26,10 @@
   <managed-bean-class>pl.com.fakturago.controllers.ProvinceBean</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
- <managed-bean>
-  <managed-bean-name>pdfBean</managed-bean-name>
-  <managed-bean-class>pl.com.fakturago.controllers.PdfCreator</managed-bean-class>
-  <managed-bean-scope>request</managed-bean-scope>
- </managed-bean>
+<validator>
+<validator-id>peselValidator</validator-id>
+<validator-class>pl.com.fakturago.config.PeselValidator</validator-class>
+</validator>
  <application>
   <resource-bundle>
    <base-name>pl.com.fakturago.messages</base-name>

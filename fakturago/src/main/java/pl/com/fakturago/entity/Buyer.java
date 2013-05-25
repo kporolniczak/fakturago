@@ -12,7 +12,9 @@ import java.util.List;
 @Entity
 @Table(name="buyer")
 @NamedQueries({
-	@NamedQuery(name = "Buyer.findAll", query = "SELECT p FROM Buyer p")
+	@NamedQuery(name = "Buyer.findAll", query = "SELECT p FROM Buyer p"),
+	@NamedQuery(name = "Buyer.findByPesel", 
+	query = "SELECT b FROM Buyer b WHERE b.pesel = :pesel")
 	})
 public class Buyer implements Serializable {
 	private static final long serialVersionUID = 1L;

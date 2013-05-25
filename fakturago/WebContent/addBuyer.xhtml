@@ -12,7 +12,7 @@
 <h:form>
 
 <p:growl id="growl" showDetail="true" sticky="true" />
-<p:panel header="Dodaj klienta">
+<p:panel id="panel" header="Dodaj klienta">
 <h:panelGrid columns="2" cellpadding="5">
 <h:outputText value="#{msg.name} *" />
 <p:inputText value="#{buyerBean.buyer.name}" required="true"/>
@@ -31,12 +31,14 @@
             var="province" itemValue="#{province}" itemLabel="#{province.name}"/>   
         </p:selectOneMenu> 
 <h:outputText value="#{msg.pesel}" />
-<p:inputMask value="#{buyerBean.buyer.pesel}" mask="99999999999"/>
+<p:inputMask value="#{buyerBean.buyer.pesel}" mask="99999999999">
+<f:validator id="validator" validatorId="peselValidator"/>
+</p:inputMask>
 <h:outputText value="#{msg.mail}" />
 <p:inputText value="#{buyerBean.buyer.mail}" validatorMessage="#Nieprawidłowy adres email">
 <f:validateRegex pattern="([\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z])?" />
 </p:inputText>
-<p:commandButton value="#{msg.addBuyer}" actionListener="#{buyerBean.saveBuyer}" icon="ui-icon-disk" update="growl"/>  
+<p:commandButton value="#{msg.addBuyer}" actionListener="#{buyerBean.saveBuyer}" icon="ui-icon-disk" update="growl panel"/>  
 </h:panelGrid>
  </p:panel>
  </h:form>
