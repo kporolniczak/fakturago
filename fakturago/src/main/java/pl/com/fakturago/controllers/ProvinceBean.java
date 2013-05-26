@@ -17,12 +17,18 @@ public class ProvinceBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Province province;
+	
+	//Getters and setters
+	
 	public Province getProvince() {
 		return province;
 	}
 	public void setProvince(Province province) {
 		this.province = province;
 	}
+	
+	//Actions
+	
 	public List<Province> getProvinceList(){
 		EntityManager em = DBManager.getManager().createEntityManager();
 		List list = em.createNamedQuery("Province.findAll").getResultList();

@@ -30,7 +30,7 @@
             <f:selectItems value="#{provinceBean.provinceList}" 
             var="province" itemValue="#{province}" itemLabel="#{province.name}"/>   
         </p:selectOneMenu> 
-<h:outputText value="#{msg.pesel}" />
+<h:outputText value="#{msg.pesel} *" />
 <p:inputMask value="#{buyerBean.buyer.pesel}" mask="99999999999">
 <f:validator id="validator" validatorId="peselValidator"/>
 </p:inputMask>

@@ -7,5 +7,8 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/fakturago</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">pass</property>
+    <property name="hibernate.connection.useUnicode">true</property>
+	<property name="hibernate.connection.characterEncoding">UTF-8</property>
+	<property name="hibernate.connection.charSet">UTF-8</property>
   </session-factory>
 </hibernate-configuration>

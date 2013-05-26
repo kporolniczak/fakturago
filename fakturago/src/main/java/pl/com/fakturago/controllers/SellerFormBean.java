@@ -16,6 +16,8 @@ public class SellerFormBean implements Serializable {
 
 	private Seller seller = new Seller();
 
+	//Getters and setters
+	
 	public Seller getSeller() {
 		return seller;
 	}
@@ -23,6 +25,8 @@ public class SellerFormBean implements Serializable {
 	public void setSeller(Seller seller) {
 		this.seller = seller;
 	}
+	
+	//Actions
 	
 	public String loadToEdit(){
 		EntityManager em = DBManager.getManager().createEntityManager();

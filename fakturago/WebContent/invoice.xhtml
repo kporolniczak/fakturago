@@ -17,12 +17,14 @@
  <p:inputText value="#{invoiceBean.invoice.number}"/>
  <p:spacer width="150px" height="1px"/>
 <h:outputText value="Data wystawienia"/> 
- <p:calendar value="#{invoiceBean.invoice.dateOfDraft}" id="dcalandar" pattern="dd/MM/yyyy"/>
+ <p:calendar value="#{invoiceBean.invoice.dateOfDraft}" 
+ id="dcalandar" pattern="dd/MM/yyyy" navigator="true"/>
  <h:outputText />
  <h:outputText />
  <h:outputText />
 <h:outputText value="Data sprzedaży"/> 
- <p:calendar value="#{invoiceBean.invoice.dateOfSell}" id="scalandar" pattern="dd/MM/yyyy"/>
+ <p:calendar value="#{invoiceBean.invoice.dateOfSell}"
+id="scalandar" pattern="dd/MM/yyyy" navigator="true"/>
  <h:outputText />
  <h:outputText />
  <h:outputText />
@@ -157,7 +159,8 @@ numVisible="1" vertical="true" itemStyle="width:300px">
                 <f:selectItems value="#{invoiceBean.formsOfPayment}"/>   
             </p:selectOneMenu> 
 <h:outputText value="Termin zapłaty" />
-<p:calendar value="#{invoiceBean.invoice.paidBefore}" id="tcalandar" pattern="dd/MM/yyyy"/>
+<p:calendar value="#{invoiceBean.invoice.paidBefore}" 
+id="tcalandar" pattern="dd/MM/yyyy" navigator="true"/>
 <h:outputText value="Suma" />
 <h:outputText value="#{invoiceBean.invoice.total}"/>
 <h:outputText value="Zaliczka" />
@@ -172,7 +175,7 @@ numVisible="1" vertical="true" itemStyle="width:300px">
 <p:commandButton value="Drukuj" type="button" icon="ui-icon-print">  
         <p:printer target="invoice" />  
     </p:commandButton> 
-<p:commandButton value="Zapisz" actionListener="#{invoiceBean.saveInvoice}" icon="ui-icon-disk" update="messages"/>
+<p:commandButton value="Generuj PDF" disabled="true" icon="ui-icon-disk" update="messages"/>
  </p:panel>
 
 <p:dialog header="Add another line" widgetVar="lineDialog" id="lineDlg" appendToBody="false" 

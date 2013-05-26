@@ -113,6 +113,8 @@ public class BuyerFormBean implements Serializable {
         		((Buyer) event.getObject()).getName());  
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }  
+    
+    //Navigation
     public String swicthToBuyersList(){
 		return "./buyersList.xhtml";
 	}

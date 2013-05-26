@@ -31,6 +31,13 @@ public class InvoiceFormBean implements Serializable{
 		this.line = line;
 	}
 	
+	public InvoiceFormBean(Seller seller, Invoice invoice, Line line) {
+		this.seller = seller;
+		this.invoice = invoice;
+		this.line = line;
+	}
+	
+	//Getters and setters
 	public Seller getSeller() {
 		return seller;
 	}
@@ -78,10 +85,13 @@ public class InvoiceFormBean implements Serializable{
 	formsOfPayment.add("przelew");
 	}
 
+	//Actions
+	
 	public String loadToEdit(){
 		EntityManager em = DBManager.getManager().createEntityManager();
 		em.getTransaction().begin();
 		this.seller = em.find(Seller.class, 1);
+		this.invoice = new Invoice();
 		em.close();
 		return "./invoice.xhtml";
 	}
@@ -92,15 +102,6 @@ public class InvoiceFormBean implements Serializable{
 		return list;
 	}
 	
-	public void onCellEdit(CellEditEvent event) {  
-        Object oldValue = event.getOldValue();  
-        Object newValue = event.getNewValue();  
-          
-        if(newValue != null && !newValue.equals(oldValue)) {  
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);  
-            FacesContext.getCurrentInstance().addMessage(null, msg);  
-        }  
-    }  
 	public String reinit() {  
         line = new Line();         
         return "./invoice.xhtml";  
@@ -112,13 +113,7 @@ public class InvoiceFormBean implements Serializable{
 		lines.add(newLine);
 		return "./index.xhtml";
 	}
-
-	public InvoiceFormBean(Seller seller, Invoice invoice, Line line) {
-		this.seller = seller;
-		this.invoice = invoice;
-		this.line = line;
-	}
-	
+		
 	public String saveInvoice(ActionEvent ae){
 
 		EntityManager em = DBManager.getManager().createEntityManager();
